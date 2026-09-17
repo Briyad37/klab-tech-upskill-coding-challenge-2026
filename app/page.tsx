@@ -85,8 +85,9 @@ export default function Home() {
 
   return (
     <main className="container">
-      <h1>Task Management System</h1>
-
+<h1 className="page-title">
+  <span>Task</span> Management System
+</h1>
       <form onSubmit={createTask} className="task-form">
         <input
           type="text"

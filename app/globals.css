@@ -22,8 +22,19 @@ body {
   padding: 40px 20px;
 }
 
-h1 {
+.page-title {
   margin-bottom: 30px;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-align: center;
+}
+
+.page-title span {
+  background: linear-gradient(90deg, #18181b, #6366f1);
+  /* -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; */
+  background-clip: text;
 }
 
 .task-form {
