@@ -27,7 +27,7 @@ The application allows users to:
 ### 1. Clone the project
 
 ```bash
-git clone <your-github-repository-url>
+git clone https://github.com/Briyad37/klab-tech-upskill-coding-challenge-2026.git
 cd klab-tech-upskill-coding-challenge-2026
 ```
 
