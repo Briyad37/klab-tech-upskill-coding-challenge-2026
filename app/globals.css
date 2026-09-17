@@ -139,3 +139,10 @@ button:disabled {
     min-width: auto;
   }
 }
+
+.edit-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

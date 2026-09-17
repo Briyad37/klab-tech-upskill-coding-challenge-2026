@@ -14,10 +14,16 @@ type Task = {
 export default function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [filter, setFilter] = useState("ALL");
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("MEDIUM");
   const [loading, setLoading] = useState(false);
+
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editTitle, setEditTitle] = useState("");
+  const [editDescription, setEditDescription] = useState("");
+  const [editPriority, setEditPriority] = useState("MEDIUM");
 
   const fetchTasks = async () => {
     const response = await fetch("/api/tasks");
@@ -56,6 +62,39 @@ export default function Home() {
     fetchTasks();
   };
 
+  const startEditing = (task: Task) => {
+    setEditingId(task.id);
+    setEditTitle(task.title);
+    setEditDescription(task.description);
+    setEditPriority(task.priority);
+  };
+
+  const cancelEditing = () => {
+    setEditingId(null);
+    setEditTitle("");
+    setEditDescription("");
+    setEditPriority("MEDIUM");
+  };
+
+  const saveEdit = async (id: number) => {
+    if (!editTitle.trim() || !editDescription.trim()) return;
+
+    await fetch(`/api/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: editTitle,
+        description: editDescription,
+        priority: editPriority,
+      }),
+    });
+
+    cancelEditing();
+    fetchTasks();
+  };
+
   const toggleStatus = async (task: Task) => {
     await fetch(`/api/tasks/${task.id}`, {
       method: "PUT",
@@ -63,7 +102,8 @@ export default function Home() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        status: task.status === "PENDING" ? "COMPLETED" : "PENDING",
+        status:
+          task.status === "PENDING" ? "COMPLETED" : "PENDING",
       }),
     });
 
@@ -85,9 +125,10 @@ export default function Home() {
 
   return (
     <main className="container">
-<h1 className="page-title">
-  <span>Task</span> Management System
-</h1>
+      <h1 className="page-title">
+        <span>Task</span> Management System
+      </h1>
+
       <form onSubmit={createTask} className="task-form">
         <input
           type="text"
@@ -119,7 +160,9 @@ export default function Home() {
       <div className="filters">
         <button onClick={() => setFilter("ALL")}>All</button>
         <button onClick={() => setFilter("PENDING")}>Pending</button>
-        <button onClick={() => setFilter("COMPLETED")}>Completed</button>
+        <button onClick={() => setFilter("COMPLETED")}>
+          Completed
+        </button>
       </div>
 
       <section className="tasks">
@@ -128,26 +171,71 @@ export default function Home() {
         ) : (
           filteredTasks.map((task) => (
             <article key={task.id} className="task-card">
-              <div>
-                <h2>{task.title}</h2>
-                <p>{task.description}</p>
+              {editingId === task.id ? (
+                <div className="edit-form">
+                  <input
+                    type="text"
+                    value={editTitle}
+                    onChange={(e) => setEditTitle(e.target.value)}
+                  />
 
-                <small>
-                  Priority: {task.priority} | Status: {task.status}
-                </small>
-              </div>
+                  <textarea
+                    value={editDescription}
+                    onChange={(e) =>
+                      setEditDescription(e.target.value)
+                    }
+                  />
 
-              <div className="actions">
-                <button onClick={() => toggleStatus(task)}>
-                  {task.status === "PENDING"
-                    ? "Mark Completed"
-                    : "Mark Pending"}
-                </button>
+                  <select
+                    value={editPriority}
+                    onChange={(e) =>
+                      setEditPriority(e.target.value)
+                    }
+                  >
+                    <option value="LOW">Low Priority</option>
+                    <option value="MEDIUM">Medium Priority</option>
+                    <option value="HIGH">High Priority</option>
+                  </select>
 
-                <button onClick={() => deleteTask(task.id)}>
-                  Delete
-                </button>
-              </div>
+                  <div className="actions">
+                    <button onClick={() => saveEdit(task.id)}>
+                      Save
+                    </button>
+
+                    <button onClick={cancelEditing}>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div>
+                    <h2>{task.title}</h2>
+                    <p>{task.description}</p>
+
+                    <small>
+                      Priority: {task.priority} | Status:{" "}
+                      {task.status}
+                    </small>
+                  </div>
+
+                  <div className="actions">
+                    <button onClick={() => startEditing(task)}>
+                      Edit
+                    </button>
+
+                    <button onClick={() => toggleStatus(task)}>
+                      {task.status === "PENDING"
+                        ? "Mark Completed"
+                        : "Mark Pending"}
+                    </button>
+
+                    <button onClick={() => deleteTask(task.id)}>
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
             </article>
           ))
         )}
