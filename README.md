@@ -1,117 +1,36 @@
-# kLab Tech Upskill Program
-## Full-Stack Coding Challenge
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Congratulations on being shortlisted for the **kLab Tech Upskill Program**! 🎉
+## Getting Started
 
-As part of the final selection process, you are required to complete this coding challenge. The challenge will assess your ability to build a simple application with a **frontend, backend, API, and database**.
+First, run the development server:
 
----
-
-## 💻 Challenge: Task Management System
-
-Build a simple web application that allows users to manage tasks.
-
-### Your application should allow users to:
-
-- View all tasks
-- Create a task
-- Edit a task
-- Delete a task
-- Mark a task as **Pending** or **Completed**
-- Filter tasks by status
-
-Each task should contain at least:
-
-```text
-id
-title
-description
-status
-priority
-createdAt
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
-## 🔧 Backend Requirements
 
-Create a **REST API** to manage the tasks.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-At minimum, implement the following endpoints:
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-| Method | Endpoint | Purpose |
-|---|---|---|
-| `GET` | `/tasks` | Get all tasks |
-| `GET` | `/tasks/:id` | Get one task |
-| `POST` | `/tasks` | Create a task |
-| `PUT` | `/tasks/:id` | Update a task |
-| `DELETE` | `/tasks/:id` | Delete a task |
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-The task data must be stored in a **database**.
+## Learn More
 
----
+To learn more about Next.js, take a look at the following resources:
 
-## 🛠️ Technology
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You are free to use technologies you are comfortable with.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-### Examples
+## Deploy on Vercel
 
-**Frontend:**
-- React
-- Next.js
-- Vue
-- Angular
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-**Backend:**
-- Node.js / Express
-- Django
-- Laravel
-- Spring Boot
-
-**Database:**
-- PostgreSQL
-- MySQL
-- MongoDB
-- SQLite
-
-> **Note:** We are interested in your ability to build and explain the solution, not in a specific technology.
-
----
-
-## ⭐ Optional Features
-
-If you have time, you may add:
-
-- User authentication
-- Search
-- Pagination
-- Form validation
-- Tests
-- API documentation
-- Deployment
-- Improved UI/UX
-
-> These features are **not required**. Focus on completing the core requirements first.
-
----
-
-## 📤 How to Submit
-
-1. **Fork this repository** to your GitHub account or create a new repository.
-2. Build your solution in the repository (yours or forked).
-3. Add a `README.md` explaining:
-   - Technologies used
-   - How to install and run the project
-   - How to set up the database
-   - Any important technical decisions or additional features
-4. If possible, **deploy your application** and include the live demo link in your README.
-5. Submit your project using the this [Link](https://forms.gle/BtwBgyGT1hXVdb1TA)
-
-### The submission form will ask for:
-
-- Full name
-- Email address
-- GitHub repository link
-- Live demo link (if available)
-- Technologies used
-- Other basic information about your submission
-
-> **Submission deadline:** Friday, 18 September 2026 at **8:30 AM (Rwanda Time)**.
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

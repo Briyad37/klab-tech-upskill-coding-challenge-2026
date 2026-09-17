@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+enum Status {
+  PENDING
+  COMPLETED
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  status      Status   @default(PENDING)
+  priority    Priority @default(MEDIUM)
+  createdAt   DateTime @default(now())
+}
