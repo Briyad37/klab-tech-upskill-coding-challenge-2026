@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Management System
 
-## Getting Started
+A simple web application for creating and managing tasks.
 
-First, run the development server:
+## Technologies Used
+
+* **Next.js** – used to build the web application and API.
+* **TypeScript** – used for writing the application code.
+* **MySQL** – used to store the tasks.
+* **Prisma** – used to connect the application to the MySQL database and manage the database.
+* **CSS** – used to design the user interface.
+
+## Features
+
+The application allows users to:
+
+* View all tasks
+* Create new tasks
+* Edit tasks
+* Delete tasks
+* Mark tasks as Pending or Completed
+* Filter tasks by status
+* Set task priority as Low, Medium, or High
+
+## How to Install and Run
+
+### 1. Clone the project
+
+```bash
+git clone <your-github-repository-url>
+cd klab-tech-upskill-coding-challenge-2026
+```
+
+### 2. Install the dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up the environment variables
+
+Create a `.env` file in the main project folder.
+
+Add:
+
+```env
+DATABASE_URL="your-mysql-database-url"
+```
+
+Replace the value with your MySQL database connection URL.
+
+### 4. Set up the database
+
+Create a MySQL database called:
+
+```text
+task_management
+```
+
+Then run the Prisma migrations:
+
+```bash
+npx prisma migrate deploy
+```
+
+Generate the Prisma client:
+
+```bash
+npx prisma generate
+```
+
+### 5. Start the application
+
+For development:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## API Endpoints
 
-## Learn More
+The application provides the following REST API endpoints:
 
-To learn more about Next.js, take a look at the following resources:
+| Method | Endpoint         | Description   |
+| ------ | ---------------- | ------------- |
+| GET    | `/api/tasks`     | Get all tasks |
+| GET    | `/api/tasks/:id` | Get one task  |
+| POST   | `/api/tasks`     | Create a task |
+| PUT    | `/api/tasks/:id` | Update a task |
+| DELETE | `/api/tasks/:id` | Delete a task |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Tasks can also be filtered by status using:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```text
+/api/tasks?status=PENDING
+```
 
-## Deploy on Vercel
+or:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```text
+/api/tasks?status=COMPLETED
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Technical Decisions
+
+I used **Next.js** for both the frontend and backend so that the application could be kept simple and use one project.
+
+I used **Prisma** to make working with the MySQL database easier and to manage database migrations.
+
+The task status and priority use fixed values to keep the data consistent:
+
+* Status: `PENDING` or `COMPLETED`
+* Priority: `LOW`, `MEDIUM`, or `HIGH`
+
+The database connection is stored in an environment variable instead of being written directly in the source code.
+
+## Additional Features
+
+In addition to the required CRUD operations, the application includes:
+
+* Task editing
+* Task priority
+* Filtering by task status
+* Responsive design for smaller screens
+* Basic input validation
+* REST API endpoints
