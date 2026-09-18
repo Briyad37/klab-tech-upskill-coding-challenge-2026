@@ -8,7 +8,7 @@ A simple web application for creating and managing tasks.
 * **TypeScript** – used for writing the application code.
 * **MySQL** – used to store the tasks.
 * **Prisma** – used to connect the application to the MySQL database and manage the database.
-* **CSS** – used to design the user interface.
+* **CSS** – used to style the user interface.
 
 ## Features
 
@@ -37,8 +37,13 @@ cd klab-tech-upskill-coding-challenge-2026
 npm install
 ```
 
-### 3. Set up the environment variables
+### 3. Set up the database
 
+Create a MySQL database called:
+
+```text
+task_management
+```
 Create a `.env` file in the main project folder.
 
 Add:
@@ -48,14 +53,6 @@ DATABASE_URL="your-mysql-database-url"
 ```
 
 Replace the value with your MySQL database connection URL.
-
-### 4. Set up the database
-
-Create a MySQL database called:
-
-```text
-task_management
-```
 
 Then run the Prisma migrations:
 
@@ -69,7 +66,7 @@ Generate the Prisma client:
 npx prisma generate
 ```
 
-### 5. Start the application
+### 4. Start the application
 
 For development:
 
@@ -120,13 +117,4 @@ The task status and priority use fixed values to keep the data consistent:
 
 The database connection is stored in an environment variable instead of being written directly in the source code.
 
-## Additional Features
 
-In addition to the required CRUD operations, the application includes:
-
-* Task editing
-* Task priority
-* Filtering by task status
-* Responsive design for smaller screens
-* Basic input validation
-* REST API endpoints
